@@ -1,34 +1,29 @@
 import useDataStore from "../../components/DataStore";
 import {useEffect, useState} from "react";
+import {ContactDetails} from "./ContactDetails";
+import {StoreDetails} from "./StoreDetails";
+import Container from '@mui/material/Container'
 
 export const Settings = () => {
 
-  // Setting Values
-   const email = useDataStore((state) => state.email)
-   let chain = useDataStore((state) => state.chain)
-   let address1 = useDataStore((state) => state.address1)
-   let city = useDataStore((state) => state.city)
-   let state = useDataStore((state) => state.state)
-   let zipcode = useDataStore((state) => state.zipcode)
-   let products = useDataStore((state) => state.products)
-
-  const [emailInputVal, setEmailInputVal] = useState(email)
-
-  const updateEmail = () => {
-    // Hits the set_email endpoint
-    console.log('in updateEmail')
-  }
+  // for ContactDetails. Placed out here to force a re-render when
+  // it is received from the server
+  let email = useDataStore((state) => state.email)
+  // StoreDetails
+  // let chain = useDataStore((state) => state.chain)
+  // let address1 = useDataStore((state) => state.address1)
+  // let city = useDataStore((state) => state.city)
+  // let state = useDataStore((state) => state.state)
+  // let zipcode = useDataStore((state) => state.zipcode)
+  // let products = useDataStore((state) => state.products)
 
    return (
      <div>
-       <label htmlFor={'email-input'}>Contact Email</label>
-       <input name={'email-input'} type={'text'} value={emailInputVal}
-              onChange={(e)=>{setEmailInputVal(e.target.value)}}
-       />
-       <button type={'button'} onClick={updateEmail}>Update</button>
-
-        <h1>{email}</h1>
+       <Container>
+         {/*<ContactDetails email={email}/>*/}
+         <ContactDetails/>
+         <StoreDetails/>
+       </Container>
      </div>
    )
-
 }

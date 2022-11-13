@@ -9,9 +9,11 @@ function fetchWrapper (details) {
     payload,  For the API's consumption
     method
   }
-
    */
-  fetch(`http://localhost:5000/${details.endpoint}`,
+  console.log('in fetchWrapper. Logging details')
+  console.log(details)
+
+  fetch(`http://localhost:5000/${details.endPoint}`,
     {credentials: 'include', method: details.method, mode: 'cors',
     body: JSON.stringify(details.payload),
       headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}

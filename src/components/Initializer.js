@@ -8,11 +8,10 @@ export const Initializer = () => {
 
   const initialIngest = useDataStore((state) => state.initialIngest)
 
-  const onSuccess = (response) => {
+  const onSuccess = (data) => {
     // Update the data store with the data from get_all
     console.log('Initalizer success. Updating data store')
-    console.log(response.data)
-    const data = response.data
+    console.log(data)
     initialIngest(data)
   };
   const onFailure = (response, data) => {
@@ -29,7 +28,7 @@ export const Initializer = () => {
     onSuccess: onSuccess,
     onFailure: onFailure,
     onError: onError,
-    endpoint: 'get_all',
+    endPoint: 'get_all',
     method: 'get'
   }
   fetchWrapper(fetchDetails)

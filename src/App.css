@@ -1,38 +1,87 @@
-.App {
-  text-align: center;
+.flex-container {
+  display: flex
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.flex-container-column {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.div-inline {
+  display: inline-block;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.store-search-modal {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+  z-index: 100;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
+.store-search-modal-content {
+  width: 30%;
+  height: 60%;
+  margin: 10% auto;
+  background-color: white;
+  overflow-y: hidden;
+}
+
+.store-input-container {
+  max-height: 20%;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.store-results-container {
+  max-height: 80%;
+  padding-top: 15px;
+  overflow-y: auto;
+}
+
+.store-search-item-container {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-bottom: 2px solid black;
+  display: flex;
+  justify-content: space-between;
+}
+
+.store-address-container {
+  display: inline-block;
+}
+
+.store-select-button-container {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+
+.dialog-modal {
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black with opacity */
+
+}
+
+.dialog-modal-content {
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  background-color: #FFFFFF;
+}
+
+.store-close-btn-container {
+  display: flex;
+  flex-direction: row-reverse;
+
 }
