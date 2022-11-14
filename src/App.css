@@ -88,15 +88,17 @@
 
 .pricing-div {
   margin-left: 10px;
+  margin-bottom: 10px;
   height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column-reverse;
 }
 
-.MuiCard-root {
-  display: flex;
-  flex-direction: column;
-}
+/*.MuiCard-root {*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*}*/
 
 .dialog-modal {
   position: fixed;

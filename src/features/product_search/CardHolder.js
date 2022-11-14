@@ -1,9 +1,11 @@
 import Card from '@mui/material/Card'
 import CardActions from '@mui/material/CardActions';
+import {CardActionArea} from "@mui/material";
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import {useState} from 'react'
 
 export const CardHolder = ({results}) => {
   /*
@@ -23,9 +25,14 @@ export const CardHolder = ({results}) => {
     "upc": "0001111041700"
     }
    */
-  // Which img size should we use here?
+  const [showProdModal, setShowProdModal] = useState(false)
+
+  const displayParams = (title, regPrice, promoPrice) => () => {
+    alert(`${title}: ${regPrice}: ${promoPrice}`)
+  }
 
   return (
+
     <div className={'card-holder-all'}>
       {results.map(productData => {
         let mediumUrl = ''
@@ -46,27 +53,39 @@ export const CardHolder = ({results}) => {
             })
           }
         })
+        let regularPrice = productData.items[0].price.regular
+        let promo = productData.items[0].price.promo
+        if(parseInt(promo) === 0) promo = regularPrice
         return (
           <div className={'card-div'}>
           <Card key={productData.productId}
                 sx={{height: '100%'}}
           >
-            <CardMedia
-              component={'img'}
-              image={mediumUrl}
-              height={'100'}
-              sx={{objectFit: 'contain'}}
-            />
-            <CardContent sx={{objectFit: 'contain'}}>
-              <Typography gutterBottom variant={'body1'} component={'div'}>
-                {productData.description}
-              </Typography>
-            </CardContent>
-            <div className={'pricing-div'}>
-              <div style={{display: 'flex'}}>
-                Here is an example thing.
+            <CardActionArea sx={{height: '100%'}}
+                            onClick={displayParams(productData.description, regularPrice, promo)}
+            >
+             <div style={{display: 'flex', flexDirection: 'column', height: '100%'}}>
+              <CardMedia
+                component={'img'}
+                image={mediumUrl}
+                height={'100'}
+                sx={{objectFit: 'contain'}}
+              />
+              <CardContent sx={{objectFit: 'contain'}}>
+                <Typography gutterBottom variant={'body1'} component={'div'}>
+                  {productData.description}
+                </Typography>
+              </CardContent>
+              <div className={'pricing-div'}>
+                <div>
+                <span>
+                Normal: ${regularPrice} <br/>
+                Promo: ${promo}
+                  </span>
+                </div>
               </div>
-            </div>
+             </div>
+            </CardActionArea>
           </Card>
           </div>
           )
