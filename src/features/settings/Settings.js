@@ -19,7 +19,7 @@ export const Settings = () => {
 
    return (
      <div>
-       <Container>
+       <Container sx={{paddingY: '20px'}}>
          {/*<ContactDetails email={email}/>*/}
          <ContactDetails/>
          <StoreDetails/>

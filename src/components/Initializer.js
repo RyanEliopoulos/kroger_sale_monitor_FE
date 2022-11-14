@@ -32,5 +32,4 @@ export const Initializer = () => {
     method: 'get'
   }
   fetchWrapper(fetchDetails)
-
 };
