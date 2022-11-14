@@ -35,6 +35,12 @@ const DataStore = (set) => ({
     set((state) => ({
       email: updatedEmail
     }))
+  },
+
+  addProduct: (newProduct) => {
+    set((state) => ({
+      products: [...state.products, newProduct]
+    }))
   }
 
 });

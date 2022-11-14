@@ -5,7 +5,9 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import {useState} from 'react'
+import {useState, useRef, useEffect} from 'react'
+import {ProductCard} from "./ProductCard";
+
 
 export const CardHolder = ({results}) => {
   /*
@@ -26,9 +28,12 @@ export const CardHolder = ({results}) => {
     }
    */
   const [showProdModal, setShowProdModal] = useState(false)
+  // const [modalProductData, setModalProductData] = useState(null)
+  let modalProductData = useRef(null)
 
-  const displayParams = (title, regPrice, promoPrice) => () => {
-    alert(`${title}: ${regPrice}: ${promoPrice}`)
+  const displayParams = (productData) => {
+    modalProductData = productData
+    setShowProdModal(true)
   }
 
   return (
@@ -57,37 +62,11 @@ export const CardHolder = ({results}) => {
         let promo = productData.items[0].price.promo
         if(parseInt(promo) === 0) promo = regularPrice
         return (
-          <div className={'card-div'}>
-          <Card key={productData.productId}
-                sx={{height: '100%'}}
-          >
-            <CardActionArea sx={{height: '100%'}}
-                            onClick={displayParams(productData.description, regularPrice, promo)}
-            >
-             <div style={{display: 'flex', flexDirection: 'column', height: '100%'}}>
-              <CardMedia
-                component={'img'}
-                image={mediumUrl}
-                height={'100'}
-                sx={{objectFit: 'contain'}}
-              />
-              <CardContent sx={{objectFit: 'contain'}}>
-                <Typography gutterBottom variant={'body1'} component={'div'}>
-                  {productData.description}
-                </Typography>
-              </CardContent>
-              <div className={'pricing-div'}>
-                <div>
-                <span>
-                Normal: ${regularPrice} <br/>
-                Promo: ${promo}
-                  </span>
-                </div>
-              </div>
-             </div>
-            </CardActionArea>
-          </Card>
-          </div>
+          <ProductCard productData={productData}
+                       regPrice={regularPrice}
+                       promoPrice={promo}
+                       mediumUrl={mediumUrl}
+          />
           )
       })}
     </div>

@@ -28,8 +28,7 @@ export const ProductSearch = () => {
       {noResults &&
         <h1>No matching search results</h1>
       }
-      <CardHolder results={results}
-      />
+      <CardHolder results={results} />
     </Container>
   )
 }
