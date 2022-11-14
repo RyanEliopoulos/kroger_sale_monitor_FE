@@ -6,7 +6,8 @@ import useDataStore from "../../components/DataStore";
 import fetchWrapper from "../../utils/fetchWrapper";
 
 
-export const ProductModal = ({productData, regPrice, promoPrice, isWatched, setShowProductModal}) => {
+export const ProductModal = ({productData, regPrice, promoPrice,
+                               isWatched, setShowProductModal, mediumUrl}) => {
   /*
   {
     "productId": "0001111041700",
@@ -57,7 +58,13 @@ export const ProductModal = ({productData, regPrice, promoPrice, isWatched, setS
   }
   const selectWatch = () => {
     // Submitting product to the server. Updating data store upon success
-    if(isWatched) return
+    if(isWatched) return // Don't want to resubmit
+    if(targetPrice === '' || targetPrice === '.') {
+      // Invalid input. Toggling text to red
+      let label = document.getElementById('targetInputLabel')
+      label.style.color = 'red';
+      return
+    }
     console.log('selecting!')
     setShowProductModal(false)
     const onSuccess = (json) => {
@@ -96,28 +103,65 @@ export const ProductModal = ({productData, regPrice, promoPrice, isWatched, setS
         />
         }
         <Container>
-          <p>{productData.description}</p> <br/>
+          <div className={'productModalImgDiv'}>
+            <img src={mediumUrl}
+                 alt={`${productData.description}`}
+                 height={100}
+                 style={{objectFit: 'contain'}}
+            />
+          </div>
+          <div className={'flex-container flex-justify-center'}>
+            <p>{productData.description}</p>
+          </div>
           {isWatched &&
             <h1> This product is already on the watch list</h1>
           }
           {!isWatched &&
-            <div>
-              <p>Normal: {`$${regPrice}`}</p> <br/>
-              <p>Promo: {`$${promoPrice}`}</p> <br/>
-              <label htmlFor={'targetPriceInput'}>Target: $</label>
+          <div>
+            {promoPrice !== regPrice &&
+            <div className={'productModalPriceDiv'}>
+              <p>Promo: {`$${promoPrice}`}</p>
+            </div>
+            }
+            <div className={'productModalPriceDiv'}>
+              <p>Normal: {`$${regPrice}`}</p>
+            </div>
+            <div className={'productModalPriceDiv'}>
+              <label htmlFor={'targetPriceInput'}
+                     id={'targetInputLabel'}
+              >Target: $</label>
               <input name={'targetPriceInput'}
                      value={targetPrice}
                      onChange={targetChange}
                      size={8}
               />
             </div>
+          </div>
           }
-          <div className={'productModalDiv'}>
-            <Button variant={'outline'}
+          {/*<p>{productData.description}</p> <br/>*/}
+          {/*{isWatched &&*/}
+          {/*  <h1> This product is already on the watch list</h1>*/}
+          {/*}*/}
+          {/*{!isWatched &&*/}
+          {/*  <div>*/}
+          {/*    <p>Normal: {`$${regPrice}`}</p> <br/>*/}
+          {/*    <p>Promo: {`$${promoPrice}`}</p> <br/>*/}
+          {/*    <label htmlFor={'targetPriceInput'}*/}
+          {/*           id={'targetInputLabel'}*/}
+          {/*    >Target: $</label>*/}
+          {/*    <input name={'targetPriceInput'}*/}
+          {/*           value={targetPrice}*/}
+          {/*           onChange={targetChange}*/}
+          {/*           size={8}*/}
+          {/*    />*/}
+          {/*  </div>*/}
+          {/*}*/}
+          <div className={'productModalBtnDiv'}>
+            <Button variant={'outlined'}
                     onClick={selectCancel}
                     sx={{marginRight: '10px', marginLeft: '10px'}}
             > Cancel </Button>
-            <Button variant={'outline'}
+            <Button variant={'outlined'}
                     onClick={selectWatch}
                     sx={{marginRight: '10px', marginLeft: '10px'}}
             > Watch </Button>

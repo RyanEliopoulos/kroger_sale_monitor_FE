@@ -44,6 +44,7 @@ export const ProductCard = ({productData, regPrice, promoPrice, mediumUrl}) => {
                         regPrice={regPrice}
                         promoPrice={promoPrice}
                         isWatched={isWatched}
+                        mediumUrl={mediumUrl}
           />
         }
         <CardActionArea sx={{height: '100%'}}
@@ -67,9 +68,11 @@ export const ProductCard = ({productData, regPrice, promoPrice, mediumUrl}) => {
             <div className={'pricing-div'}>
               <div>
                 <span>
-                Normal: ${regPrice} <br/>
-                Promo: ${promoPrice}
-                  </span>
+                  { promoPrice !== regPrice &&
+                  <span> Promo: ${promoPrice} <br/></span>
+                  }
+                Normal: ${regPrice}
+                </span>
               </div>
             </div>
           </div>

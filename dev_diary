@@ -1,3 +1,7 @@
+11/14/2022
+
+    Default div display (block) defaults to width: 100%. inline causes width to shrink to content.
+
 11/13/2022
     GET requests do not have a body. Any 'args' need to be included in the query string instead.
 
