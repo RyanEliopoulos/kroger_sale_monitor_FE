@@ -2,6 +2,9 @@
 
     Default div display (block) defaults to width: 100%. inline causes width to shrink to content.
 
+    Kroger API will sometimes return products that have no pricing information. Patched by setting undefined prices
+    to 0.
+
 11/13/2022
     GET requests do not have a body. Any 'args' need to be included in the query string instead.
 

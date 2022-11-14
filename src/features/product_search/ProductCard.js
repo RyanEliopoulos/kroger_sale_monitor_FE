@@ -19,12 +19,12 @@ export const ProductCard = ({productData, regPrice, promoPrice, mediumUrl}) => {
 
   useEffect(()=> {
     // sets isWatched if product is already watched
-    console.log('logging watchedProducts')
-    console.log(watchedProducts)
-    console.log(productData.upc)
-    console.log(watchedProductIds)
+    // console.log('logging watchedProducts')
+    // console.log(watchedProducts)
+    // console.log(productData.upc)
+    // console.log(watchedProductIds)
     if(watchedProductIds.includes(productData.upc)) {
-      console.log(`product ${productData.description} is already watched`)
+      // console.log(`product ${productData.description} is already watched`)
       setIsWatched(true)
     }
     else {

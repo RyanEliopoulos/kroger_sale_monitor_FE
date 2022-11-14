@@ -27,14 +27,6 @@ export const CardHolder = ({results}) => {
     "upc": "0001111041700"
     }
    */
-  const [showProdModal, setShowProdModal] = useState(false)
-  // const [modalProductData, setModalProductData] = useState(null)
-  let modalProductData = useRef(null)
-
-  const displayParams = (productData) => {
-    modalProductData = productData
-    setShowProdModal(true)
-  }
 
   return (
 
@@ -43,29 +35,40 @@ export const CardHolder = ({results}) => {
         let mediumUrl = ''
         productData.images.forEach(imgObj => {
           if(imgObj.perspective !== 'front') {
-            console.log(`non-front perspectgive: ${imgObj.perspective}`)
+            // console.log(`non-front perspectgive: ${imgObj.perspective}`)
           }
           else {
             console.log(`Found the front perspective`)
             imgObj.sizes.forEach(sizeObj => {
               if(sizeObj.size === 'medium') {
-                console.log(`Found the medium: ${sizeObj.url}`)
+                // console.log(`Found the medium: ${sizeObj.url}`)
                 mediumUrl = sizeObj.url
               }
               else {
-                console.log(`Found a non-medium size: ${sizeObj.size}`)
+                // console.log(`Found a non-medium size: ${sizeObj.size}`)
               }
             })
           }
         })
-        let regularPrice = productData.items[0].price.regular
-        let promo = productData.items[0].price.promo
+        let regularPrice = productData.items[0]?.price?.regular
+        if(regularPrice === undefined) {
+          console.error('We have a product whose price is undefined')
+          console.error(productData)
+          regularPrice = 0
+        }
+        let promo = productData.items[0]?.price?.promo
+        if(promo === undefined) {
+          console.error(`We have a product whose promo price is undefined`)
+          console.error(promo)
+          promo = 0
+        }
         if(parseInt(promo) === 0) promo = regularPrice
         return (
           <ProductCard productData={productData}
                        regPrice={regularPrice}
                        promoPrice={promo}
                        mediumUrl={mediumUrl}
+                       key={productData.upc}
           />
           )
       })}

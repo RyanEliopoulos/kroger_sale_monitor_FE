@@ -4,11 +4,14 @@ import {Dialog} from '../../components/Dialog'
 
 
 
-export const SearchBar = ({setTotalPages, setResults, setNoResults, pageSize}) => {
+export const SearchBar = ({setTotalPages, setResults, setNoResults,
+                            pageSize, raiseSearchTerm}) => {
   /*
     Submits the initial query to the API.
     Updates page count and initial search results.
     Pagination of results is handled elsewhere.
+
+    raiseSearchTerm: setSearchTerm of parent. Needed for paginating requests
    */
   const [searchTerm, setSearchTerm] = useState('')
   const [showModal, setShowModal] = useState(false)
@@ -32,6 +35,7 @@ export const SearchBar = ({setTotalPages, setResults, setNoResults, pageSize}) =
       setResults(json.data)
       console.log('Successfully submitted search term')
       console.log(json)
+      raiseSearchTerm(searchTerm)
     }
     const onFailure = (response, json) => {
       console.log('Failure submitting search term')
@@ -48,7 +52,8 @@ export const SearchBar = ({setTotalPages, setResults, setNoResults, pageSize}) =
     let qParams = new URLSearchParams({
       initial_query: true,
       search_term: searchTerm,
-      page_size: pageSize
+      page_size: pageSize,
+      page: 1
     })
 
     let details = {
