@@ -15,12 +15,11 @@ export const ContactDetails = () => {
 
   const updateEmail = () => {
     console.log('in updateEmail')
-    console.log(email)
     // Fetch callbacks for set_email endpoint
     const onSuccess = () => {
       // Successfully updated email. Open modal.
       console.log('Successfully updated email')
-      useDataStore.setState({email: email})
+      useDataStore.setState({email: updatedEmail})
     }
     const onFailure = (response, data) => {
       // non-200 response from the server
@@ -42,7 +41,7 @@ export const ContactDetails = () => {
       onFailure: onFailure,
       onError: onError,
       endPoint: 'set_email',
-      payload: {email: email},
+      payload: {email: updatedEmail},
       method: 'post'
     }
     fetchWrapper(details)
