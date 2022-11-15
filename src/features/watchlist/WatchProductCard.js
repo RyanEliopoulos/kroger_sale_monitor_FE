@@ -57,7 +57,7 @@ export const WatchProductCard = ({product}) => {
               <div style={{display: 'flex', justifyContent: 'space-between'}}>
                 <div >
                 <span>
-                  { parseInt(product.promo_price) !== 0 &&
+                  { product.promo_price !== product.normal_price &&
                     <span> Promo: ${product.promo_price} <br/></span>
                   }
                   Normal: ${product.normal_price} <br/>
