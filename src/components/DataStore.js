@@ -7,11 +7,13 @@ const DataStore = (set) => ({
   city: '',
   state: '',
   zipcode: '',
+  locationID: '',
   products: [],
 
   initialIngest: (data) => {
     set((state) => ({
       email: data.email,
+      locationID: data.location_id,
       chain: data.chain,
       address1: data.address1,
       city: data.city,
@@ -23,6 +25,7 @@ const DataStore = (set) => ({
 
   updateSelectedStore: (storeObject) => {
     set((state) => ({
+      locationID: storeObject.locationId,
       chain: storeObject.chain,
       address1: storeObject.address.addressLine1,
       city: storeObject.address.city,

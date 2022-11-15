@@ -5,6 +5,7 @@ import {CardHolder} from "./CardHolder";
 import {Pagination} from "@mui/material";
 import {Dialog} from '../../components/Dialog'
 import fetchWrapper from "../../utils/fetchWrapper";
+import useDataStore from "../../components/DataStore";
 
 
 export const ProductSearch = () => {
@@ -22,6 +23,7 @@ export const ProductSearch = () => {
   const [results, setResults] = useState([])
   const [showErrorModal, setShowErrorModal] = useState(false)
   const [modalMsg, setModalMsg] = useState('')
+  let locationID = useDataStore((state) => state.locationID)
 
   const pageSwitch = (event, pageNum) => {
     // Hits product_search endpoint with updated pagination details
@@ -57,6 +59,16 @@ export const ProductSearch = () => {
       endPoint: 'search_products?' + qParams,
     }
     fetchWrapper(details)
+  }
+
+  console.log('here is the locationID')
+  console.log(locationID)
+  if(locationID === '') {
+    return (
+      <Container sx={{paddingY: '20px'}}>
+        <h1>You must select a store before monitoring products.</h1>
+      </Container>
+    )
   }
 
   return (
