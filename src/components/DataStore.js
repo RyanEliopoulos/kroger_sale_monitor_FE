@@ -41,8 +41,26 @@ const DataStore = (set) => ({
     set((state) => ({
       products: [...state.products, newProduct]
     }))
-  }
+  },
 
+  updateTargetPrice: (productUPC, newTargetPrice) => {
+    set((state) => ({
+      products: state.products.map(product => {
+        if(product.product_upc === productUPC) {
+          product.target_price = newTargetPrice
+        }
+        return product
+      })
+    }))
+  },
+
+  removeProduct: (watchedProductID) => {
+    set((state) => ({
+      products: state.products.filter(product => (
+        product.watched_product_id !== watchedProductID
+      ))
+    }))
+  }
 });
 
 const useDataStore = create(DataStore)

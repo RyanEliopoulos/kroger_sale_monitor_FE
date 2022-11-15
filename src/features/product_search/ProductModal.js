@@ -56,7 +56,7 @@ export const ProductModal = ({productData, regPrice, promoPrice,
     console.log('canceling!')
     setShowProductModal(false)
   }
-  const selectWatch = () => {
+  const selectWatch = (regularPrice, promoPrice) => () => {
     // Submitting product to the server. Updating data store upon success
     if(isWatched) return // Don't want to resubmit
     if(targetPrice === '' || targetPrice === '.') {
@@ -87,7 +87,11 @@ export const ProductModal = ({productData, regPrice, promoPrice,
       endPoint: 'new_watched',
       payload: {
         product_upc: productData.upc,
-        target_price: targetPrice
+        product_description: productData.description,
+        normal_price: regularPrice,
+        promo_price: promoPrice,
+        target_price: targetPrice,
+        image_url: mediumUrl
       },
       method: 'post'
     }
@@ -138,31 +142,13 @@ export const ProductModal = ({productData, regPrice, promoPrice,
             </div>
           </div>
           }
-          {/*<p>{productData.description}</p> <br/>*/}
-          {/*{isWatched &&*/}
-          {/*  <h1> This product is already on the watch list</h1>*/}
-          {/*}*/}
-          {/*{!isWatched &&*/}
-          {/*  <div>*/}
-          {/*    <p>Normal: {`$${regPrice}`}</p> <br/>*/}
-          {/*    <p>Promo: {`$${promoPrice}`}</p> <br/>*/}
-          {/*    <label htmlFor={'targetPriceInput'}*/}
-          {/*           id={'targetInputLabel'}*/}
-          {/*    >Target: $</label>*/}
-          {/*    <input name={'targetPriceInput'}*/}
-          {/*           value={targetPrice}*/}
-          {/*           onChange={targetChange}*/}
-          {/*           size={8}*/}
-          {/*    />*/}
-          {/*  </div>*/}
-          {/*}*/}
           <div className={'productModalBtnDiv'}>
             <Button variant={'outlined'}
                     onClick={selectCancel}
                     sx={{marginRight: '10px', marginLeft: '10px'}}
             > Cancel </Button>
             <Button variant={'outlined'}
-                    onClick={selectWatch}
+                    onClick={selectWatch(regPrice, promoPrice)}
                     sx={{marginRight: '10px', marginLeft: '10px'}}
             > Watch </Button>
           </div>

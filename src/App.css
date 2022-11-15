@@ -11,6 +11,11 @@
   flex-direction: column;
 }
 
+
+.flexColumnReverse {
+  flex-direction: column-reverse
+}
+
 .div-inline {
   display: inline-block;
 }
@@ -92,9 +97,10 @@
 
 .pricing-div {
   margin-left: 10px;
+  margin-right: 10px;
   margin-bottom: 10px;
   height: 100%;
-  width: 100%;
+  /*width: 100%;*/
   display: flex;
   flex-direction: column-reverse;
 }
@@ -154,5 +160,15 @@
 }
 
 .productModalPriceDiv {
+}
 
+.watchModalBtnDiv {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.watchModalPricesContainer {
+  display: flex;
+  justify-content: space-between;
 }

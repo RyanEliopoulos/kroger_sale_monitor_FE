@@ -13,7 +13,6 @@ export const ProductSearch = () => {
    */
   // Pagination flags
   const pageSize = 50 // Results per page. 50 is max server will take.
-  const [page, setPage] = useState(null)
   const [totalPages, setTotalPages] = useState(null)
   const [noResults, setNoResults] = useState(false) // SearchBar search term yielded no results
   const [searchTerm, setSearchTerm] = useState(false) // Pull state from search bar for pagination calls
@@ -35,7 +34,6 @@ export const ProductSearch = () => {
       }
       console.log('Scrolling body to top')
       document.documentElement.scrollTop = 0;
-
     }
     const onFailure = (response, json) => {
       setModalMsg(`Error paginating: ${response.status}, ${json.error}`)

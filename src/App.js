@@ -4,6 +4,7 @@ import {CenteredTabs} from "./components/Tabs";
 import {Initializer} from "./components/Initializer";
 import {Settings} from "./features/settings/Settings";
 import {ProductSearch} from "./features/product_search/ProductSearch";
+import {WatchList} from "./features/watchlist/WatchList";
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
       <CenteredTabs/>
       <Routes>
         <Route path={'/'} element={<Navigate to={'/watchlist'}/>}/>
-        <Route exact path={'/watchlist'} element={<h1> This is the watchlist</h1>}/>
+        <Route exact path={'/watchlist'} element={<WatchList/>}/>
         <Route exact path={'/search_products'} element={<ProductSearch/>}/>
         <Route exact path={'/settings'} element={<Settings/>}/>
       </Routes>

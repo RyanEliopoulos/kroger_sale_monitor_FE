@@ -52,7 +52,7 @@ export const ProductCard = ({productData, regPrice, promoPrice, mediumUrl}) => {
         >
           <div style={{display: 'flex', flexDirection: 'column', height: '100%'}}>
             {isWatched &&
-              <CheckIcon/>
+              <CheckIcon style={{color: 'green'}}/>
             }
             <CardMedia
               component={'img'}
