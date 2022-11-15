@@ -49,9 +49,10 @@ export const WatchProductModal = ({product, setShowProductModal}) => {
     }
     setShowProductModal(false)
     const onSuccess = (json) => {
-      // Update data store with new targetPrice
+      // Update data store with new targetPrice.
+      // Use server-returned value as it will truncated excessive decimal places.
       console.log('Update success from server. Updating local store')
-      updateTargetPrice(product.product_upc, targetPrice)
+      updateTargetPrice(product.product_upc, json.target_price)
       console.log('Here is the updated watchedProducts array')
       console.log(watchedProducts)
     }
@@ -153,7 +154,6 @@ export const WatchProductModal = ({product, setShowProductModal}) => {
             <Button variant={'outlined'}
                     onClick={selectDelete}
                     sx={{color:'red', outlineColor: 'black', borderColor: 'red'}}
-                      // border: '2px solid yellow'}}
             > DELETE </Button>
           </div>
           <div>
