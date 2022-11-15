@@ -75,6 +75,8 @@ export const SearchBar = ({setTotalPages, setResults, setNoResults,
         submitSearchTerm()
       }
       else {
+        setModalMsg('Search term must be at least 3 characters')
+        setShowModal(true)
         console.log('Search term is not long enough. Must be at least 3 chars')
       }
     }
