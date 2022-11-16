@@ -1,3 +1,13 @@
+11/15/2022
+
+    React Router with useRoutes
+        <Router>
+           {element}
+        </Router>
+
+
+      Didn't work. But pulling Router to the parent component, then return <>{element}</> Did. But whyyyy
+
 11/14/2022
 
     Default div display (block) defaults to width: 100%. inline causes width to shrink to content.

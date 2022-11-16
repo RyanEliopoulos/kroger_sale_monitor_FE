@@ -20,16 +20,16 @@ export const WatchProductModal = ({product, setShowProductModal}) => {
   const [targetPrice, setTargetPrice] = useState(product.target_price.toString())
   // Guard fnx for updating targetPrice
   const targetChange = (event) => {
-    if(event.target.value.length < targetPrice.length) {
+    if (event.target.value.length < targetPrice.length) {
       // Deletion occurred. That is always fine.
       setTargetPrice(event.target.value)
       return
     }
     let lastChar = event.target.value.charAt(event.target.value.length - 1)
-    if(!validTargetChars.includes(lastChar)) {
+    if (!validTargetChars.includes(lastChar)) {
       return
     }
-    if(lastChar === '.' && targetPrice.includes('.')) {
+    if (lastChar === '.' && targetPrice.includes('.')) {
       return
     }
     setTargetPrice(event.target.value)
@@ -41,7 +41,7 @@ export const WatchProductModal = ({product, setShowProductModal}) => {
 
   const selectSave = () => {
     // Send the watched_product_id and the new target price
-    if(targetPrice === '' || targetPrice === '.') {
+    if (targetPrice === '' || targetPrice === '.') {
       // Invalid input. Toggling text to red
       let label = document.getElementById('targetInputLabel')
       label.style.color = 'red';
@@ -77,9 +77,9 @@ export const WatchProductModal = ({product, setShowProductModal}) => {
     }
     fetchWrapper(details)
   }
-   const selectDelete = () => {
+  const selectDelete = () => {
     // Hit the delete endpoint. Update local store to remove
-     // this product
+    // this product
     const onSuccess = (json) => {
       // Removing product from data store
       removeProduct(product.watched_product_id)
@@ -103,72 +103,74 @@ export const WatchProductModal = ({product, setShowProductModal}) => {
       method: 'post'
     }
     fetchWrapper(details)
-   }
+  }
 
   return (
     <div className={'productModal'}>
-     <div className={'productModalContent'}>
-       {showErrorMdl &&
-         <Dialog msg={modalMsg}
-                 onClose={()=>{setShowErrorMdl(false)}}
-         />
-       }
-      <Container>
-        <div className={'productModalImgDiv'}>
-          <img src={product.image_url}
-               alt={`${product.product_description}`}
-               height={100}
-               style={{objectFit: 'contain'}}
-          />
-        </div>
-        <div className={'flex-container flex-justify-center'}>
-          <p>{product.product_description}</p>
-        </div>
-        <div className={'watchModalPricesContainer'}>
-          <div>
-          {product.promo_price !== product.normal_price &&
-          <div className={'productModalPriceDiv'}>
-            <p>Promo: {`$${product.promo_price}`}</p>
-          </div>
-          }
-          <div className={'productModalPriceDiv'}>
-            <p>Normal: {`$${product.normal_price}`}</p>
-          </div>
-          </div>
-          <div className={'flex-container flexColumnReverse flex-justify-center'}>
-          <div className={'productModalPriceDiv'}>
-            <label htmlFor={'targetPriceInput'}
-                   id={'targetInputLabel'}
-            >Target: $</label>
-            <input name={'targetPriceInput'}
-                   value={targetPrice}
-                   onChange={targetChange}
-                   size={8}
-                   style={{marginTop: 'auto', marginBottom:'auto'}}
+      <div className={'productModalContent'}>
+        {showErrorMdl &&
+        <Dialog msg={modalMsg}
+                onClose={() => {
+                  setShowErrorMdl(false)
+                }}
+        />
+        }
+        <Container>
+          <div className={'productModalImgDiv'}>
+            <img src={product.image_url}
+                 alt={`${product.product_description}`}
+                 height={100}
+                 style={{objectFit: 'contain'}}
             />
           </div>
+          <div className={'flex-container flex-justify-center'}>
+            <p>{product.product_description}</p>
           </div>
-        </div>
-        <div className={'watchModalBtnDiv'}>
-          <div>
-            <Button variant={'outlined'}
-                    onClick={selectDelete}
-                    sx={{color:'red', outlineColor: 'black', borderColor: 'red'}}
-            > DELETE </Button>
+          <div className={'watchModalPricesContainer'}>
+            <div>
+              {product.promo_price !== product.normal_price &&
+              <div className={'productModalPriceDiv'}>
+                <p>Promo: {`$${product.promo_price}`}</p>
+              </div>
+              }
+              <div className={'productModalPriceDiv'}>
+                <p>Normal: {`$${product.normal_price}`}</p>
+              </div>
+            </div>
+            <div className={'flex-container flexColumnReverse flex-justify-center'}>
+              <div className={'productModalPriceDiv'}>
+                <label htmlFor={'targetPriceInput'}
+                       id={'targetInputLabel'}
+                >Target: $</label>
+                <input name={'targetPriceInput'}
+                       value={targetPrice}
+                       onChange={targetChange}
+                       size={8}
+                       style={{marginTop: 'auto', marginBottom: 'auto'}}
+                />
+              </div>
+            </div>
           </div>
-          <div>
-            <Button variant={'outlined'}
-                    onClick={selectCancel}
-                    sx={{marginRight: '10px', marginLeft: '10px'}}
-            > Cancel </Button>
-            <Button variant={'outlined'}
-                    onClick={selectSave}
-                    sx={{marginRight: '10px', marginLeft: '10px'}}
-            > Save </Button>
+          <div className={'watchModalBtnDiv'}>
+            <div>
+              <Button variant={'outlined'}
+                      onClick={selectDelete}
+                      sx={{color: 'red', outlineColor: 'black', borderColor: 'red'}}
+              > DELETE </Button>
+            </div>
+            <div>
+              <Button variant={'outlined'}
+                      onClick={selectCancel}
+                      sx={{marginRight: '10px', marginLeft: '10px'}}
+              > Cancel </Button>
+              <Button variant={'outlined'}
+                      onClick={selectSave}
+                      sx={{marginRight: '10px', marginLeft: '10px'}}
+              > Save </Button>
+            </div>
           </div>
-        </div>
-      </Container>
-     </div>
+        </Container>
+      </div>
     </div>
   )
 }

@@ -6,8 +6,10 @@ import useDataStore from "../../components/DataStore";
 import fetchWrapper from "../../utils/fetchWrapper";
 
 
-export const ProductModal = ({productData, regPrice, promoPrice,
-                               isWatched, setShowProductModal, mediumUrl}) => {
+export const ProductModal = ({
+                               productData, regPrice, promoPrice,
+                               isWatched, setShowProductModal, mediumUrl
+                             }) => {
   /*
   {
     "productId": "0001111041700",
@@ -34,17 +36,17 @@ export const ProductModal = ({productData, regPrice, promoPrice,
   const [targetPrice, setTargetPrice] = useState('')
   const targetChange = (event) => {
     console.log('In targetChange')
-    if(event.target.value.length < targetPrice.length) {
+    if (event.target.value.length < targetPrice.length) {
       // Deletion occurred. That is always fine.
       setTargetPrice(event.target.value)
       return
     }
     let lastChar = event.target.value.charAt(event.target.value.length - 1)
-    if(!validTargetChars.includes(lastChar)) {
+    if (!validTargetChars.includes(lastChar)) {
       console.log('Invalid char. Ignoring')
       return
     }
-    if(lastChar === '.' && targetPrice.includes('.')) {
+    if (lastChar === '.' && targetPrice.includes('.')) {
       console.log('targetPrice already has a period. Ignoring')
       return
     }
@@ -58,8 +60,8 @@ export const ProductModal = ({productData, regPrice, promoPrice,
   }
   const selectWatch = (regularPrice, promoPrice) => () => {
     // Submitting product to the server. Updating data store upon success
-    if(isWatched) return // Don't want to resubmit
-    if(targetPrice === '' || targetPrice === '.') {
+    if (isWatched) return // Don't want to resubmit
+    if (targetPrice === '' || targetPrice === '.') {
       // Invalid input. Toggling text to red
       let label = document.getElementById('targetInputLabel')
       label.style.color = 'red';
@@ -102,8 +104,11 @@ export const ProductModal = ({productData, regPrice, promoPrice,
     <div className={'productModal'}>
       <div className={'productModalContent'}>
         {showErrorModal &&
-          <Dialog msg={errorModalMsg}
-                  onClose={()=>{setShowProductModal(false); setShowErrorModal(false)}}
+        <Dialog msg={errorModalMsg}
+                onClose={() => {
+                  setShowProductModal(false);
+                  setShowErrorModal(false)
+                }}
         />
         }
         <Container>
@@ -118,7 +123,7 @@ export const ProductModal = ({productData, regPrice, promoPrice,
             <p>{productData.description}</p>
           </div>
           {isWatched &&
-            <h1> This product is already on the watch list</h1>
+          <h1> This product is already on the watch list</h1>
           }
           {!isWatched &&
           <div>

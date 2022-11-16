@@ -6,6 +6,7 @@ import {Pagination} from "@mui/material";
 import {Dialog} from '../../components/Dialog'
 import fetchWrapper from "../../utils/fetchWrapper";
 import useDataStore from "../../components/DataStore";
+import {CenteredTabs} from "../../components/Tabs";
 
 
 export const ProductSearch = () => {
@@ -30,7 +31,7 @@ export const ProductSearch = () => {
     const onSuccess = (json) => {
       console.log('Successful search_products page')
       setResults(json.data)
-      if(results.length === 0) {
+      if (results.length === 0) {
         console.error('Length of product_search in pageSwitch is 0')
         setNoResults(true)
       }
@@ -63,38 +64,40 @@ export const ProductSearch = () => {
 
   console.log('here is the locationID')
   console.log(locationID)
-  if(locationID === '') {
+  if (locationID === '') {
     return (
-      <Container sx={{paddingY: '20px'}}>
-        <h1>You must select a store before monitoring products.</h1>
-      </Container>
+        <Container sx={{paddingY: '20px'}}>
+          <h1>You must select a store before monitoring products.</h1>
+        </Container>
     )
   }
 
   return (
-    <Container sx={{paddingY: '20px'}}>
-      {showErrorModal &&
+      <Container sx={{paddingY: '20px'}}>
+        {showErrorModal &&
         <Dialog msg={modalMsg}
-                onClose={()=>{setShowErrorModal(false)}}
+                onClose={() => {
+                  setShowErrorModal(false)
+                }}
         />
-      }
-      <SearchBar setTotalPages={setTotalPages}
-                 setResults={setResults}
-                 setNoResults={setNoResults}
-                 pageSize={pageSize}
-                 raiseSearchTerm={setSearchTerm}
-      />
-      {noResults &&
+        }
+        <SearchBar setTotalPages={setTotalPages}
+                   setResults={setResults}
+                   setNoResults={setNoResults}
+                   pageSize={pageSize}
+                   raiseSearchTerm={setSearchTerm}
+        />
+        {noResults &&
         <h1>No matching search results</h1>
-      }
-      <CardHolder results={results} />
-      {totalPages !== null &&
+        }
+        <CardHolder results={results}/>
+        {totalPages !== null &&
         <div className={'flex-container flex-justify-center'}>
           <Pagination count={totalPages}
                       onChange={pageSwitch}
           />
         </div>
-      }
-    </Container>
+        }
+      </Container>
   )
 }
