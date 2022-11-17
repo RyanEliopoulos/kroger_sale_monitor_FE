@@ -34,7 +34,6 @@ export const StoreDetails = () => {
       {isOpen &&
       <StoreSearchModal isOpen={isOpen} setIsOpen={setIsOpen}/>
       }
-      {/*<StoreSearchModal isOpen={isOpen} setIsOpen={setIsOpen}/>*/}
     </div>
   )
 }

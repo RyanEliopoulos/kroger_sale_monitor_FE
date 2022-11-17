@@ -12,19 +12,13 @@ import CheckIcon from '@mui/icons-material/Check';
 export const ProductCard = ({productData, regPrice, promoPrice, mediumUrl}) => {
 
   const watchedProducts = useDataStore((store) => store.products)
-  // const watchedProductIds = watchedProducts.map(product => product.product_upc)
   const watchedProductIds = watchedProducts.map(product => product.product_upc)
   const [isWatched, setIsWatched] = useState(false)
   const [showProdModal, setShowProdModal] = useState(false)
 
   useEffect(()=> {
     // sets isWatched if product is already watched
-    // console.log('logging watchedProducts')
-    // console.log(watchedProducts)
-    // console.log(productData.upc)
-    // console.log(watchedProductIds)
     if(watchedProductIds.includes(productData.upc)) {
-      // console.log(`product ${productData.description} is already watched`)
       setIsWatched(true)
     }
     else {

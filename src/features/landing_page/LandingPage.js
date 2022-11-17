@@ -48,7 +48,7 @@ export const LandingPage = () => {
 
   useEffect(()=>{
     checkSession()
-  }, [checkSession])
+  }, [])
 
   return (
 
