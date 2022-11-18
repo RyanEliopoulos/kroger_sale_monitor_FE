@@ -1,3 +1,8 @@
+11/17/2022
+    Deploying a react app outside of the root directory requires extra care.  <Router> Needs a 'basename' property set
+    and potentially changing any hardcoded route values. 'homepage' in package.json must also be updated.
+
+
 11/15/2022
 
     React Router with useRoutes
