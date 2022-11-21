@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 import fetchWrapper from "../../utils/fetchWrapper";
 import {Dialog} from '../../components/Dialog';
 import {EmailEntry} from "./EmailEntry";
+import {Container} from "@mui/material";
 
 
 export const LandingPage = () => {
@@ -19,12 +20,11 @@ export const LandingPage = () => {
 
   const checkSession = () => {
     const onSuccess = (json) => {
-      if(json.has_session === true) {
+      if (json.has_session === true) {
         initStore(json.data)
         console.log('Continuing session..redirecting to Watch List')
         navigate('/app/watch_list')
-      }
-      else {
+      } else {
         console.log('This is not a continuing session')
       }
     }
@@ -46,18 +46,21 @@ export const LandingPage = () => {
     fetchWrapper(details)
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     checkSession()
   }, [])
 
   return (
 
-    <>
-    {showModal &&
-     <Dialog msg={modalMsg} onClose={()=>{setShowModal(false)}}/>
-    }
-    <h1>This is the landing page</h1>
-      <EmailEntry/>
-    </>
+    <Container sx={{height: '100%'}}>
+      {showModal &&
+      <Dialog msg={modalMsg} onClose={() => {
+        setShowModal(false)
+      }}/>
+      }
+      <div className={'landingPageTopDiv'}>
+        <EmailEntry/>
+      </div>
+    </Container>
   )
 }

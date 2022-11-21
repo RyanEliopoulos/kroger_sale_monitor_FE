@@ -172,3 +172,34 @@
   display: flex;
   justify-content: space-between;
 }
+
+
+.landingPageTopDiv {
+  margin-top: 20vh;
+  display: flex;
+  justify-content: center;
+}
+
+.landingContext {
+  font-size: .8em;
+}
+
+.landingPageContextDiv {
+
+}
+
+.landingPageInputDiv {
+  display: flex;
+  /*justify-content: center;*/
+  flex-direction: row;
+  padding-left: 5vw;
+  margin-bottom: 15px;
+}
+
+.landingLabel {
+  margin-right: 10px;
+}
+
+.landingButton {
+  margin-top: 15px;
+}

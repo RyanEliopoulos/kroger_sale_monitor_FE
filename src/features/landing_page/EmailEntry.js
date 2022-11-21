@@ -4,12 +4,13 @@ import useDataStore from "../../components/DataStore";
 import {useNavigate} from 'react-router'
 import fetchWrapper from "../../utils/fetchWrapper";
 import {InputComponent} from "./InputComponent";
+import {Button} from "@mui/material";
 
 export const EmailEntry = () => {
 
   const [modalMsg, setModalMsg] = useState('')
   const [showModal, setShowModal] = useState(false)
-  // const [email, setEmail] = useState('')
+  const [email, setEmail] = useState('')
   const initialIngest = useDataStore((state) => state.initialIngest)
   const navigate = useNavigate()
 
@@ -48,7 +49,24 @@ export const EmailEntry = () => {
         <Dialog msg={modalMsg} onClose={()=>{setShowModal(false)}}/>
       }
 
-      <InputComponent submit={submitEmail}/>
+      <div className={'landingPageInputDiv'}>
+          <InputComponent email={email} setEmail={setEmail}/>
+      </div>
+      <div>
+        <span className={'landingContext'}>
+          Maintain access to your watch list by providing a contact email. <br/>
+          Price alerts are sent out Thursdays at 12pm Pacific. <br/>
+          Receive text alerts using your mobile carrier's email-to-sms gateway e.g. &lt;your_number&gt;@vtext.com for
+          verizon customers.
+        </span>
+      </div>
+      <div className={'flex-container flex-justify-center landingButton'}>
+        <div>
+          <Button variant={'outlined'}
+                  onClick={()=>{submitEmail(email)}}
+          >Submit</Button>
+        </div>
+      </div>
     </div>
   )
 }
