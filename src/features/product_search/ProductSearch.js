@@ -6,22 +6,25 @@ import {Pagination} from "@mui/material";
 import {Dialog} from '../../components/Dialog'
 import fetchWrapper from "../../utils/fetchWrapper";
 import useDataStore from "../../components/DataStore";
-import {CenteredTabs} from "../../components/Tabs";
 
 
 export const ProductSearch = () => {
   /*
     Primary component for the "Search products" tab.
+    Initial query is handled by SearchBar. Pagination is handled here.
    */
   // Pagination flags
   const pageSize = 50 // Results per page. 50 is max server will take.
-  const [totalPages, setTotalPages] = useState(null)
+  // const [totalPages, setTotalPages] = useState(null)
+  const totalPages = useDataStore((state) => state.totalPages)
+  const searchResults = useDataStore((state) => state.searchResults)
+  const setSearchResults = useDataStore((state) => state.setSearchResults)
+  const searchTerm = useDataStore((state) => state.searchTerm)
+
   const [noResults, setNoResults] = useState(false) // SearchBar search term yielded no results
-  const [searchTerm, setSearchTerm] = useState(false) // Pull state from search bar for pagination calls
   // results are passed to SearchBar for initial query.
   // Expects an array of objects under the 'data' key from Kroger API:
   // https://developer.kroger.com/reference/#operation/productGet
-  const [results, setResults] = useState([])
   const [showErrorModal, setShowErrorModal] = useState(false)
   const [modalMsg, setModalMsg] = useState('')
   let locationID = useDataStore((state) => state.locationID)
@@ -30,8 +33,8 @@ export const ProductSearch = () => {
     // Hits product_search endpoint with updated pagination details
     const onSuccess = (json) => {
       console.log('Successful search_products page')
-      setResults(json.data)
-      if (results.length === 0) {
+      setSearchResults(json.data)
+      if (searchResults.length === 0) {
         console.error('Length of product_search in pageSwitch is 0')
         setNoResults(true)
       }
@@ -81,17 +84,14 @@ export const ProductSearch = () => {
                 }}
         />
         }
-        <SearchBar setTotalPages={setTotalPages}
-                   setResults={setResults}
-                   setNoResults={setNoResults}
+        <SearchBar setNoResults={setNoResults}
                    pageSize={pageSize}
-                   raiseSearchTerm={setSearchTerm}
         />
         {noResults &&
         <h1>No matching search results</h1>
         }
-        <CardHolder results={results}/>
-        {totalPages !== null &&
+        <CardHolder results={searchResults}/>
+        {totalPages !== 0 &&
         <div className={'flex-container flex-justify-center'}>
           <Pagination count={totalPages}
                       onChange={pageSwitch}

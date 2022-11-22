@@ -1,6 +1,7 @@
 import create from 'zustand'
 
 const DataStore = (set) => ({
+  // Account state.
   email: '',
   chain: '',
   address1: '',
@@ -10,6 +11,10 @@ const DataStore = (set) => ({
   locationID: '',
   receiveAlerts: null,
   products: [],
+  // Product search state.
+  totalPages: 0,
+  searchResults: [],
+  searchTerm: '',
 
   initialIngest: (data) => {
     set((state) => ({
@@ -71,7 +76,24 @@ const DataStore = (set) => ({
     set((state) => ({
       receiveAlerts: !state.receiveAlerts
     }))
-  }
+  },
+
+  // Search state functions
+  setTotalPages: (pages) => {
+    set((state) => ({
+      totalPages: pages
+    }))
+  },
+  setSearchResults: (results) => {
+    set((state) => ({
+      searchResults: results
+    }))
+  },
+  setSearchTerm: (searchTerm) => {
+    set((state) => ({
+      searchTerm: searchTerm
+    }))
+  },
 });
 
 const useDataStore = create(DataStore)
