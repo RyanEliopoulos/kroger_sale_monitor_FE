@@ -8,26 +8,49 @@ import {ProductSearch} from "./features/product_search/ProductSearch";
 import {WatchList} from "./features/watchlist/WatchList";
 import {LandingPage} from './features/landing_page/LandingPage'
 import {AppRoutes} from "./features/routes";
+import useDataStore from "./components/DataStore";
 
 function App() {
 
-  const routes = [
-    {
-      path: '/',
-      element: <LandingPage/>
-    },
-
-    {
-      path: '/app',
-      element: <CenteredTabs/>,
-      children: [
-        {
-          path: '*',
-          element: <AppRoutes/>
-        }
-      ]
-    }
+  /*
+    Handles user refreshes by defaulting application routes to the landing page.
+   */
+  const isRefreshed = useDataStore((state) => state.refreshed)
+  let routes = [
+      {
+        path: '/',
+        element: <LandingPage/>
+      },
   ]
+  if(!isRefreshed) {
+    routes = [...routes,
+        {
+          path: '/app',
+          element: <CenteredTabs/>,
+          children: [
+            {
+              path: '*',
+              element: <AppRoutes/>
+            }
+          ]
+        }
+    ]
+  }
+  else {
+    routes = [...routes,
+      {
+        path: '/app',
+        element: <LandingPage/>,
+        children: [
+          {
+            path: '*',
+            element: <LandingPage/>
+          }
+        ]
+      }
+    ]
+  }
+
   const element = useRoutes(routes)
 
   return (

@@ -9,15 +9,17 @@ const DataStore = (set) => ({
   state: '',
   zipcode: '',
   locationID: '',
-  receiveAlerts: null,
+  receiveAlerts: true,
   products: [],
   // Product search state.
   totalPages: 0,
   searchResults: [],
   searchTerm: '',
-  // Store search
+  // Store search state
   storeSearchZipcode: '',
   storeSearchResults: [],
+  // App state
+  refreshed: true,  // To handle browser refreshes.
 
   initialIngest: (data) => {
     set((state) => ({
@@ -109,8 +111,14 @@ const DataStore = (set) => ({
       set((state) => ({
         storeSearchResults: storeResults
       }))
-  }
+  },
 
+  // App state functions
+  setRefreshed: (isRefreshed) => {
+    set((state) => ({
+      refreshed: isRefreshed
+    }))
+  }
 });
 
 const useDataStore = create(DataStore)

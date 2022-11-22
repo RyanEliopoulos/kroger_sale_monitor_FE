@@ -14,6 +14,7 @@ export const LandingPage = () => {
   // Otherwise, wait for user to submit to start_session
 
   const initStore = useDataStore((state) => state.initialIngest)
+  const setRefreshed = useDataStore((state) => state.setRefreshed)
   const navigate = useNavigate()  // Redirect to WatchList if continuing a session
   const [modalMsg, setModalMsg] = useState('')
   const [showModal, setShowModal] = useState(false)
@@ -49,6 +50,10 @@ export const LandingPage = () => {
 
   useEffect(() => {
     checkSession()
+  }, [])
+
+  useEffect(()=>{
+    setRefreshed(false)
   }, [])
 
   return (

@@ -13,6 +13,7 @@ export const ProductSearch = () => {
     Primary component for the "Search products" tab.
     Initial query is handled by SearchBar. Pagination is handled here.
    */
+
   // Pagination flags
   const pageSize = 50 // Results per page. 50 is max server will take.
   // const [totalPages, setTotalPages] = useState(null)
@@ -74,6 +75,7 @@ export const ProductSearch = () => {
         </Container>
     )
   }
+
 
   return (
       <Container sx={{paddingY: '20px'}}>

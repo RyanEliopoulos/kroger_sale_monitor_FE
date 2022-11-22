@@ -1,14 +1,12 @@
 import useDataStore from "../../components/DataStore";
 import {Container} from "@mui/material";
 import {WatchProductCard} from "./WatchProductCard";
-import {CenteredTabs} from "../../components/Tabs";
 
 
 export const WatchList = () => {
 
   let watchedProducts = useDataStore((state) => state.products)
   console.log('in WatchList')
-
 
   return (
     <Container sx={{paddingY: '20px'}}>
