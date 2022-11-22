@@ -6,10 +6,12 @@ import {StoreResultItem} from "./StoreResultItem";
 import CloseIcon from '@mui/icons-material/Close'
 
 
-export const StoreSearchModal = ({isOpen, setIsOpen}) => {
+export const StoreSearchModal = ({setIsOpen}) => {
 
- const [zipcode, setZipcode] = useState('')
-  const [storeResults, setStoreResults] = useState([])
+  const [zipcode, setZipcode] = useState('')
+  const [componentStoreResults, setComponentStoreResults] = useState([])
+  const setStoreSearchZipcode = useDataStore((state) => state.setStoreSearchZipcode)
+  const setStoreSearchResults = useDataStore((state) => state.setStoreSearchResults)
 
   const updateZipcode = (event) => {
     // Enforces integer characters in the text field.
@@ -33,20 +35,19 @@ export const StoreSearchModal = ({isOpen, setIsOpen}) => {
     }
   }
 
-
   const searchStores = () => {
     console.log('in searchStores')
     const onSuccess = (data) => {
       console.log('successfully searched stores. Updating data store')
-      console.log('Obviously it is a function because here I am durr')
       let array = data.data
       console.log(array)
-      setStoreResults(array)
+      setComponentStoreResults(array)
+      setStoreSearchZipcode(zipcode)
+      setStoreSearchResults(array)
     }
     const onFailure = (response, data) => {
       console.log('Failure in hitting searchStores')
       console.log(response, data.error)
-
     }
     const onError = (error) => {
       console.error(error)
@@ -66,14 +67,23 @@ export const StoreSearchModal = ({isOpen, setIsOpen}) => {
     // Keydown event callback placed on zipcode-input
     if(event.key === 'Enter') {
       if(zipcode.length < 5) {
-        console.log('Zipcode is not long enough. Need to add some sort of indicator I guess')
+        console.log('Zipcode is not long enough.')
       }
       else {
-        console.log('zipcode is long enough. Submitting to Server')
         searchStores()
       }
     }
   }
+
+  const storeSearchZipcode = useDataStore((state) => state.storeSearchZipcode)
+  useEffect(()=>{
+    setZipcode(storeSearchZipcode)
+  }, [storeSearchZipcode])
+
+  const storeSearchResults = useDataStore((state) => state.storeSearchResults)
+  useEffect(()=>{
+    setComponentStoreResults(storeSearchResults)
+  }, [storeSearchResults])
 
   return (
     <div id={'store-search-modal'} className={'store-search-modal'}>
@@ -92,7 +102,7 @@ export const StoreSearchModal = ({isOpen, setIsOpen}) => {
             />
           </div>
           <div className={'store-results-container'}>
-            {storeResults.map(storeObject => {
+            {componentStoreResults.map(storeObject => {
               return (
                 <StoreResultItem storeObject={storeObject} key={storeObject.locationId} setSearchModal={setIsOpen}/>
               )

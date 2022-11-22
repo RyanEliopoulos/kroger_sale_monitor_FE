@@ -15,6 +15,9 @@ const DataStore = (set) => ({
   totalPages: 0,
   searchResults: [],
   searchTerm: '',
+  // Store search
+  storeSearchZipcode: '',
+  storeSearchResults: [],
 
   initialIngest: (data) => {
     set((state) => ({
@@ -94,6 +97,20 @@ const DataStore = (set) => ({
       searchTerm: searchTerm
     }))
   },
+
+  // Store search functions
+  setStoreSearchZipcode: (storeSearchZipcode) => {
+    set((state) => ({
+      storeSearchZipcode: storeSearchZipcode
+    }))
+  },
+
+  setStoreSearchResults: (storeResults) => {
+      set((state) => ({
+        storeSearchResults: storeResults
+      }))
+  }
+
 });
 
 const useDataStore = create(DataStore)

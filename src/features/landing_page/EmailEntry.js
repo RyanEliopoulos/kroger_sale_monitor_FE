@@ -50,7 +50,10 @@ export const EmailEntry = () => {
       }
 
       <div className={'landingPageInputDiv'}>
-          <InputComponent email={email} setEmail={setEmail}/>
+          <InputComponent email={email}
+                          setEmail={setEmail}
+                          submitEmail={submitEmail}
+          />
       </div>
       <div>
         <span className={'landingContext'}>

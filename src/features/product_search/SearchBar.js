@@ -16,11 +16,9 @@ export const SearchBar = ({setNoResults, pageSize}) => {
   const [modalMsg, setModalMsg] = useState('')
   const setTotalPages = useDataStore((state) => state.setTotalPages)
   const setSearchResults = useDataStore((state) => state.setSearchResults)
-  // const searchTerm = useDataStore((state) => state.searchTerm)
   const [searchTerm, setSearchTerm] = useState('')
   const dataStoreSearchTerm = useDataStore((state) => state.searchTerm)
   const setStoreSearchTerm = useDataStore((state) => state.setSearchTerm)
-  // const setSearchTerm = useDataStore((state) => state.setSearchTerm)
 
   const submitSearchTerm = () => {
     const onSuccess = (json) => {
@@ -41,21 +39,15 @@ export const SearchBar = ({setNoResults, pageSize}) => {
       }
       setSearchResults(json.data)
       setTotalPages(json.pages)
-      console.log(`Setting store search term: ${searchTerm}`)
       setStoreSearchTerm(searchTerm)
-      console.log('Successfully submitted search term')
-      console.log(json)
     }
     const onFailure = (response, json) => {
-      console.log('Failure submitting search term')
-      console.log(`${response.status}, ${json.error}`)
       setModalMsg(`${response.status}, ${json.error}`)
       setShowModal(true)
     }
     const onError = (error) => {
       setModalMsg(`${error}`)
       setShowModal(true)
-      console.error(`${error}`)
     }
     // Prepping fetch request
     let qParams = new URLSearchParams({
@@ -76,6 +68,9 @@ export const SearchBar = ({setNoResults, pageSize}) => {
   }
 
   useEffect(()=> {
+    // Using the data store as the 'value' of the input component
+    // caused immense lag. This is a roundabout way of doing so only when
+    // the search term has been submitted.
     setSearchTerm(dataStoreSearchTerm)
   }, [dataStoreSearchTerm])
 
@@ -114,7 +109,6 @@ export const SearchBar = ({setNoResults, pageSize}) => {
       }
       {dataStoreSearchTerm !== '' &&
       <input type={'text'}
-             defaultValue={dataStoreSearchTerm}
              value={searchTerm}
              onChange={(e) => {
                setSearchTerm(e.target.value)
@@ -123,7 +117,6 @@ export const SearchBar = ({setNoResults, pageSize}) => {
              size={50}
       />
       }
-
     </div>
   )
 }

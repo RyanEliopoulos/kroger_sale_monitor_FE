@@ -1,9 +1,11 @@
-import {useState} from 'react'
-import {Button} from "@mui/material";
 
+export const InputComponent = ({email, setEmail, submitEmail}) => {
 
-export const InputComponent = ({email, setEmail}) => {
-
+  const inputKeyDown = (event) => {
+    if(event.key === 'Enter') {
+      submitEmail(email)
+    }
+  }
 
   return (
       <>
@@ -14,6 +16,7 @@ export const InputComponent = ({email, setEmail}) => {
                onChange={(e) => {
                  setEmail(e.target.value)
                }}
+               onKeyDown={(e)=>{inputKeyDown(e)}}
         />
 
       </>
