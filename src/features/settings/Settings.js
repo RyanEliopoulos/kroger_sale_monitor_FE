@@ -6,11 +6,9 @@ import {CenteredTabs} from "../../components/Tabs";
 export const Settings = () => {
 
   return (
-      <div>
-        <Container sx={{paddingY: '20px'}}>
+        <Container sx={{paddingY: '20px', width: '50vw'}}>
           <ContactDetails/>
           <StoreDetails/>
         </Container>
-      </div>
   )
 }

@@ -1,6 +1,7 @@
 import useDataStore from "../../components/DataStore";
 import {useState} from "react";
 import {StoreSearchModal} from "./StoreSearchModal";
+import {Button} from "@mui/material";
 
 export const StoreDetails = () => {
   /*
@@ -18,22 +19,27 @@ export const StoreDetails = () => {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <div className={'flex-container'}>
-      <div>
-        <span>Store:</span>
-      </div>
-      <div>
-        {chain} <br/>
-        {address1} <br/>
-        {city}, {state} {zipcode}
-      </div>
-      <button type={'button'}
-              onClick={(e)=>{setIsOpen(!isOpen)}}>
-        Update Store
-      </button>
+    <div className={'settingsContainer'}>
       {isOpen &&
       <StoreSearchModal isOpen={isOpen} setIsOpen={setIsOpen}/>
       }
+      <div className={'flex-container flex-justify-center'}>
+        <h3>Store Details</h3>
+      </div>
+      <div className={'storeDetailsInputDiv'}>
+        <div>
+          {chain} <br/>
+          {address1} <br/>
+          {city}, {state} {zipcode}
+        </div>
+        <div className={'storeUpdateBtn'}>
+          <Button variant={'outlined'}
+                  onClick={(e) => {
+                    setIsOpen(!isOpen)
+                  }}
+          >Select Store</Button>
+        </div>
+      </div>
     </div>
   )
 }
