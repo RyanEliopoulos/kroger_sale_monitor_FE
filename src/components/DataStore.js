@@ -8,6 +8,7 @@ const DataStore = (set) => ({
   state: '',
   zipcode: '',
   locationID: '',
+  receiveAlerts: null,
   products: [],
 
   initialIngest: (data) => {
@@ -19,7 +20,8 @@ const DataStore = (set) => ({
       city: data.city,
       state: data.state,
       zipcode: data.zipcode,
-      products: data.products
+      products: data.products,
+      receiveAlerts: data.receive_alerts === 1
     }))
   },
 
@@ -62,6 +64,12 @@ const DataStore = (set) => ({
       products: state.products.filter(product => (
         product.watched_product_id !== watchedProductID
       ))
+    }))
+  },
+
+  toggleAlertStatus: () => {
+    set((state) => ({
+      receiveAlerts: !state.receiveAlerts
     }))
   }
 });

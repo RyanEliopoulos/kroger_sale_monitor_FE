@@ -21,6 +21,7 @@ export const LandingPage = () => {
   const checkSession = () => {
     const onSuccess = (json) => {
       if (json.has_session === true) {
+        console.log(json.data)
         initStore(json.data)
         console.log('Continuing session..redirecting to Watch List')
         navigate('/app/watch_list')

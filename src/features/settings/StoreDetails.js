@@ -27,11 +27,13 @@ export const StoreDetails = () => {
         <h3>Store Details</h3>
       </div>
       <div className={'storeDetailsInputDiv'}>
+        {chain !== '' &&
         <div>
           {chain} <br/>
           {address1} <br/>
           {city}, {state} {zipcode}
         </div>
+        }
         <div className={'storeUpdateBtn'}>
           <Button variant={'outlined'}
                   onClick={(e) => {

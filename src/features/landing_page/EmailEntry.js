@@ -55,7 +55,7 @@ export const EmailEntry = () => {
       <div>
         <span className={'landingContext'}>
           Maintain access to your watch list by providing a contact email. <br/>
-          Price alerts are sent out Thursdays at 12pm Pacific. <br/>
+          Price alerts are sent out Thursdays at 12pm Pacific. This can be turned off in settings.<br/>
           Receive text alerts using your mobile carrier's email-to-sms gateway e.g. &lt;your_number&gt;@vtext.com for
           verizon customers.
         </span>

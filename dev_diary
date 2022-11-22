@@ -1,3 +1,7 @@
+11/22/2022
+    Need to clarify what sort of implicit casting is happening between ints and strings in JSON.stringify and
+    server side stuff.
+
 11/17/2022
     Deploying a react app outside of the root directory requires extra care.  <Router> Needs a 'basename' property set
     and potentially changing any hardcoded route values. 'homepage' in package.json must also be updated.
