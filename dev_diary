@@ -7,6 +7,9 @@
     initially. The landing page then updates the store.refreshed variable, causing App.js to re-render the routes
     using the real components.
 
+
+    build_script.sh: Need to update the build script to set the Router basename value.
+
 11/17/2022
     Deploying a react app outside of the root directory requires extra care.  <Router> Needs a 'basename' property set
     and potentially changing any hardcoded route values. 'homepage' in package.json must also be updated.
