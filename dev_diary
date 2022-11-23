@@ -10,6 +10,8 @@
 
     build_script.sh: Need to update the build script to set the Router basename value.
 
+    Need to update build_script to set "homepage": "/apps/sale_monitor" in package.json.
+
 11/17/2022
     Deploying a react app outside of the root directory requires extra care.  <Router> Needs a 'basename' property set
     and potentially changing any hardcoded route values. 'homepage' in package.json must also be updated.
