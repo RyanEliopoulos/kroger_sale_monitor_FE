@@ -22,7 +22,7 @@ export const WatchProductCard = ({product}) => {
    */
 
   const [showProductModal, setShowProductModal] = useState(false)
-  const targetMet = product.promo_price <= product.target_price
+  const targetMet = parseFloat(product.promo_price) <= parseFloat(product.target_price)
 
   return (
     <div className={'card-div'}>
