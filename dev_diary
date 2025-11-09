@@ -1,3 +1,8 @@
+11/27/2022
+
+    Mismatch mime type: add location rules to nginx for all .css and .js files. add_header directive to set the
+    Content-Type value to text/css and application/javascript, respectively.
+
 11/22/2022
     Need to clarify what sort of implicit casting is happening between ints and strings in JSON.stringify and
     server side stuff.
